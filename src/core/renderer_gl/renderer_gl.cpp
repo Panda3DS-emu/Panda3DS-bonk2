@@ -821,7 +821,7 @@ OpenGL::Program& RendererGL::getSpecializedShader() {
 		__android_log_print(ANDROID_LOG_ERROR, "Panda3DS", "Creating specialized shader.\nVertex: %s\n\nFragment: %s\n\n", vs.c_str(), fs.c_str());
 		
 		program.create({vertShader, fragShader});
-		program.use();
+		gl.useProgram(program);
 
 		// Init sampler objects. Texture 0 goes in texture unit 0, texture 1 in TU 1, texture 2 in TU 2, and the light maps go in TU 3
 		glUniform1i(OpenGL::uniformLocation(program, "u_tex0"), 0);
