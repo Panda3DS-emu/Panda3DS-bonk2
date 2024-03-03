@@ -75,6 +75,10 @@ std::string FragmentGenerator::generate(const PICARegs& regs) {
 	}
 
 	bool unimplementedFlag = false;
+	// GLES doesn't support sampler1DArray, as such we'll have to change how we handle lighting later
+	if (api == API::GLES) {
+		ret += "#define USING_GLES 1\n";
+	}
 
 	// Input and output attributes
 	ret += R"(
@@ -93,7 +97,10 @@ std::string FragmentGenerator::generate(const PICARegs& regs) {
 		uniform sampler2D u_tex0;
 		uniform sampler2D u_tex1;
 		uniform sampler2D u_tex2;
+		// GLES doesn't support sampler1DArray, as such we'll have to change how we handle lighting later
+#ifndef USING_GLES
 		uniform sampler1DArray u_tex_lighting_lut;
+#endif
 
 		vec4 tevSources[16];
 		vec4 tevNextPreviousBuffer;
