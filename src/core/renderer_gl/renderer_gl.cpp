@@ -818,7 +818,7 @@ OpenGL::Program& RendererGL::getSpecializedShader() {
 
 		OpenGL::Shader vertShader({vs.c_str(), vs.size()}, OpenGL::Vertex);
 		OpenGL::Shader fragShader({fs.c_str(), fs.size()}, OpenGL::Fragment);
-		__android_log_print(ANDROID_LOG_ERROR, "Panda3DS", "Creating specialized shader.\nVertex: %s\n\nFragment: %s\n\n", vs.c_str(), fs.c_str());
+		__android_log_print(ANDROID_LOG_ERROR, "Panda3DS", "Creating specialized shader.\nFragment: %s\n", fs.c_str());
 		
 		program.create({vertShader, fragShader});
 		gl.useProgram(program);
