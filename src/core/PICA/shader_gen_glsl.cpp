@@ -77,7 +77,7 @@ std::string FragmentGenerator::generate(const PICARegs& regs) {
 	bool unimplementedFlag = false;
 	// GLES doesn't support sampler1DArray, as such we'll have to change how we handle lighting later
 	if (api == API::GLES) {
-		ret += "#define USING_GLES 1\n";
+		ret += "\n#define USING_GLES 1\n";
 	}
 
 	// Input and output attributes
