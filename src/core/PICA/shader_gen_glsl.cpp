@@ -12,6 +12,9 @@ std::string FragmentGenerator::getVertexShader(const PICARegs& regs) {
 	}
 
 	ret += R"(
+		precision mediump float;
+		precision mediump int;
+
 		layout(location = 0) in vec4 a_coords;
 		layout(location = 1) in vec4 a_quaternion;
 		layout(location = 2) in vec4 a_vertexColour;
@@ -82,6 +85,9 @@ std::string FragmentGenerator::generate(const PICARegs& regs) {
 
 	// Input and output attributes
 	ret += R"(
+		precision mediump float;
+		precision mediump int;
+
 		in vec3 v_tangent;
 		in vec3 v_normal;
 		in vec3 v_bitangent;
@@ -104,13 +110,6 @@ std::string FragmentGenerator::generate(const PICARegs& regs) {
 
 		vec4 tevSources[16];
 		vec4 tevNextPreviousBuffer;
-
-		vec3 regToColor(uint reg) {
-			// Normalization scale to convert from [0...255] to [0.0...1.0]
-			const float scale = 1.0 / 255.0;
-
-			return scale * vec3(float(bitfieldExtract(reg, 20, 8)), float(bitfieldExtract(reg, 10, 8)), float(bitfieldExtract(reg, 00, 8)));
-		}
 	)";
 
 	// Emit main function for fragment shader
